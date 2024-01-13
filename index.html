@@ -75,6 +75,7 @@
     //camera.attachControl(canvas, true);
     var camera = new BABYLON.ArcRotateCamera("Camera001", BABYLON.Tools.ToRadians(90), BABYLON.Tools.ToRadians(65), 10, BABYLON.Vector3.Zero(), scene);
     camera.setTarget(BABYLON.Vector3.Zero());
+    camera.attachControl(canvas, true);
     // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
     var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
 
