@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-        <title>Test with MCG default assets</title>
+        <title>test Mesh import MCG </title>
 
         <!-- Babylon.js -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
@@ -83,14 +83,7 @@
     // import geo
 
     const maleHeadMesh = BABYLON.SceneLoader.ImportMesh("", "./", "maleHeadLowRezGeo.glb", scene, function(newMeshes){
-        let generalHeadMaterial= new BABYLON.StandardMaterial ("headMaterial",scene);
-        maleHeadMesh.Material = generalHeadMaterial;
-        // create and assign diffuse
-        let diffuseMap= new BABYLON.Texture("./DiffuseCorrected.png",scene);
-        generalHeadMaterial.material.diffuseTexture = diffuseMap;
-         // create and assign specular
-        let specularMap= new BABYLON.Texture("./SpecularCorrected.png",scene);
-        generalHeadMaterial.material.specularTexture = specularMap;
+      
     
     }); 
       // This targets the camera to Obj
