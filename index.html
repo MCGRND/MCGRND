@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-        <title>Test with MCG default assets </title>
+        <title>Test with MCG default assets</title>
 
         <!-- Babylon.js -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
@@ -87,10 +87,10 @@
         maleHeadMesh.Material = generalHeadMaterial;
         // create and assign diffuse
         let diffuseMap= new BABYLON.Texture("./DiffuseCorrected.png",scene);
-        maleHeadMesh.material.diffuseTexture = diffuseMap;
+        generalHeadMaterial.material.diffuseTexture = diffuseMap;
          // create and assign specular
         let specularMap= new BABYLON.Texture("./SpecularCorrected.png",scene);
-        maleHeadMesh.material.specularTexture = specularMap;
+        generalHeadMaterial.material.specularTexture = specularMap;
     
     }); 
       // This targets the camera to Obj
@@ -125,4 +125,3 @@
     </script>
 </body>
 </html>
-
