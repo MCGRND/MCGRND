@@ -67,30 +67,51 @@
     var scene = new BABYLON.Scene(engine);
 
     // This creates and positions a free camera (non-mesh)
-    var camera = new BABYLON.ArcRotateCamera("camera1", BABYLON.Tools.ToRadians(90), BABYLON.Tools.ToRadians(65), 10, BABYLON.Vector3.Zero(), scene);
+    var camera = new BABYLON.ArcRotateCamera("Camera1", 0.1 , Math.PI/2 , 2.8 , BABYLON.Vector3.Zero(), scene);
+    
+    // This attaches the camera to the canvas
+        camera.attachControl(canvas, true);
+    
     // add framing behavior
     camera.useFramingBehavior = true;
-  
-    // This attaches the camera to the canvas
-    camera.attachControl(canvas, true);
+   //restrict camera from going underground
+    camera.upperBetaLimit = Math.PI/2;
+    camera.lowerRadiusLimit = 2.5;
+    camera.upperRadiusLimit = 10;
+    // camera Panning hard to do 
+    camera.panningSensibility = 0;
 
     // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
     var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
 
     // Default intensity is 1. Let's dim the light a small amount
-    light.intensity = 0.7;
+    light.intensity = 0.9;
+
+    // create a skybox 
+
+ const skybox = BABYLON.MeshBuilder.CreateBox("skyBox", {size:150}, scene);
+ const skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
+skyboxMaterial.backFaceCulling = false;
+skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("./CubicStudioBox.png", scene);
+skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+skyboxMaterial.diffuseColor = new BABYLON.Color3(1, 1, 1);
+skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+skybox.material = skyboxMaterial;
 
     // import geo
 
     const maleHeadMesh = BABYLON.SceneLoader.ImportMesh("", "./", "maleHeadLowRezGeo.glb", scene, function(newMeshes){
+        newMeshes[0].position.y= -0.65;
         let generalHeadMaterial= new BABYLON.StandardMaterial ("headMaterial",scene);
+       
+        //create material 
         maleHeadMesh.Material = generalHeadMaterial;
-        // create and assign diffuse
-        //let diffuseMap= new BABYLON.Texture("./DiffuseCorrected.png",scene);
-       // generalHeadMaterial.material.diffuseTexture = diffuseMap;
+        //create and assign diffuse
+        let diffuseMap= new BABYLON.Texture("./DiffuseCorrected.png",scene);
+        generalHeadMaterial.material.diffuseTexture = diffuseMap;
          // create and assign specular
-       // let specularMap= new BABYLON.Texture("./SpecularCorrected.png",scene);
-        //generalHeadMaterial.material.specularTexture = specularMap;
+        let specularMap= new BABYLON.Texture("./SpecularCorrected.png",scene);
+        generalHeadMaterial.material.specularTexture = specularMap;
     
     }); 
      
@@ -125,3 +146,5 @@
     </script>
 </body>
 </html>
+
+
