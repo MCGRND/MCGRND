@@ -99,54 +99,27 @@ directLight.diffuse = new BABYLON.Color3(1, 0.9, 0.6);
     var hdrTexture = new BABYLON.HDRCubeTexture("studio_small_03_2k.hdr", scene, 512);
 
 // Our built-in 'sphere' shape. Params: name, subdivs, size, scene
-var sphere = BABYLON.Mesh.CreateSphere("sphere1",32,20,scene,false,1);
+//UV offset 
+var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 20, segments: 32, sideOrientation:BABYLON.Mesh.DOUBLESIDE}, scene);
+//sphere.infiniteDistance = true;
 sphere.isPickable = false;
 var sphereMtl = new BABYLON.PBRMaterial("sphereMtl", scene);
 sphereMtl.backFaceCulling = true;
 sphereMtl.reflectionTexture = hdrTexture;
 sphere.material= sphereMtl;
+ // import geo
 
-
-
-
-    //scene.environmentTexture = BABYLON.CubeTexture.CreateFromPrefilteredData("./CubeStudioBox.png", scene);
- // Create a skydome
- //const skydome = BABYLON.MeshBuilder.CreateBox("sky", { size: 1000, sideOrientation: BABYLON.Mesh.BACKSIDE }, scene);
-    //skydome.position.y = 500;
-    //skydome.isPickable = false;
-    //skydome.receiveShadows = true;
-
-// Sets the skydome in ground projection mode
-//const sky = new BABYLON.BackgroundMaterial("skyMaterial", scene);
-    //sky.reflectionTexture = scene.environmentTexture.clone();
-    //sky.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
-    //sky.enableGroundProjection = true;
-   // sky.projectedGroundRadius = 20;
-    //sky.projectedGroundHeight = 3;
-   // skydome.material = sky;
-
- //const skybox = BABYLON.MeshBuilder.CreateBox("skyBox", {size:150}, scene);
- //const skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
-//skyboxMaterial.backFaceCulling = false;
-//skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("./CubicStudioBox.png", scene);
-//skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
-//skyboxMaterial.diffuseColor = new BABYLON.Color3(1, 1, 1);
-//skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-//skybox.material = skyboxMaterial;
-
-    // import geo
-
-    const maleHeadMesh = BABYLON.SceneLoader.ImportMesh("", "./", "maleHeadLowRezGeo.glb", scene, function(newMeshes){
+    const maleHeadMesh = BABYLON.SceneLoader.ImportMesh("", "./", "ShailaHead.glb", scene, function(newMeshes){
         newMeshes[0].position.y= -0.65;
         let generalHeadMaterial= new BABYLON.StandardMaterial ("headMaterial",scene);
        
         //create material 
         maleHeadMesh.Material = generalHeadMaterial;
         //create and assign diffuse
-        let diffuseMap= new BABYLON.Texture("./DiffuseCorrected.png",scene);
+        let diffuseMap= new BABYLON.Texture("./Diffuse_shaila_test001.png",scene);
         generalHeadMaterial.material.diffuseTexture = diffuseMap;
          // create and assign specular
-        let specularMap= new BABYLON.Texture("./SpecularCorrected.png",scene);
+        let specularMap= new BABYLON.Texture("./Specular_shaila_test002.png",scene);
         generalHeadMaterial.material.specularTexture = specularMap;
     
     }); 
